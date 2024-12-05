@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Capital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        select {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #capital {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Display Capital</h1>
+        <label for="countries">Select a country:</label>
+        <select id="countries" onchange="displayCapital()">
+            <option value="">--Select a Country--</option>
+            <option value="India">India</option>
+            <option value="United States">United States</option>
+            <option value="France">France</option>
+            <option value="Japan">Japan</option>
+            <option value="Australia">Australia</option>
+        </select>
+        <p id="capital"></p>
+    </div>
+
+    <script>
+        function displayCapital() {
+            // Map of countries and their capitals
+            const countryCapitals = {
+                "India": "New Delhi",
+                "United States": "Washington, D.C.",
+                "France": "Paris",
+                "Japan": "Tokyo",
+                "Australia": "Canberra"
+            };
+
+            // Get the selected country
+            const selectedCountry = document.getElementById("countries").value;
+
+            // Display the corresponding capital
+            const capitalElement = document.getElementById("capital");
+            if (selectedCountry) {
+                capitalElement.textContent = `Capital: ${countryCapitals[selectedCountry]}`;
+            } else {
+                capitalElement.textContent = ""; // Clear text if no selection
+            }
+        }
+    </script>
+</body>
+</html>
