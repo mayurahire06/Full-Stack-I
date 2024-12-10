@@ -1,0 +1,79 @@
+<!-- Create a simple arithmetic operator utility( like a calculator) using Javascript. Create an html page with two text
+boxes to read the numbers and the buttons, the Addition, subtraction, division and multiplication. On the click of the
+buttons, the Javascript should be executed and the result be displayed in a third text box. You can add more operations
+of your choice. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Operator Utility</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input[type="text"], button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Arithmetic Operator Utility</h1>
+    <div>
+        <input type="text" id="num1" placeholder="Enter first number">
+        <input type="text" id="num2" placeholder="Enter second number">
+    </div>
+    <div>
+        <button onclick="performOperation('add')">Addition</button>
+        <button onclick="performOperation('subtract')">Subtraction</button>
+        <button onclick="performOperation('multiply')">Multiplication</button>
+        <button onclick="performOperation('divide')">Division</button>
+        <button onclick="performOperation('modulus')">Modulus</button>
+        <button onclick="performOperation('power')">Power</button>
+    </div>
+    <div>
+        <input type="text" id="result" placeholder="Result" readonly>
+    </div>
+    <script>
+        function performOperation(operation) {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            let result;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                result = "Please enter valid numbers!";
+            } else {
+                switch (operation) {
+                    case 'add':
+                        result = num1 + num2;
+                        break;
+                    case 'subtract':
+                        result = num1 - num2;
+                        break;
+                    case 'multiply':
+                        result = num1 * num2;
+                        break;
+                    case 'divide':
+                        result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero!";
+                        break;
+                    case 'modulus':
+                        result = num1 % num2;
+                        break;
+                    case 'power':
+                        result = Math.pow(num1, num2);
+                        break;
+                    default:
+                        result = "Invalid operation!";
+                }
+            }
+
+            document.getElementById('result').value = result;
+        }
+    </script>
+</body>
+</html>
