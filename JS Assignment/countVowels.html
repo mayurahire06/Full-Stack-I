@@ -1,0 +1,66 @@
+<!-- write a javascript function that accepts a string as a parameter and counts the number of vowels within the string. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Vowels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+        }
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vowel Counter</h1>
+        <input type="text" id="inputString" placeholder="Enter your text here" />
+        <button onclick="countVowels()">Count Vowels</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function countVowels() {
+            const inputString = document.getElementById('inputString').value;
+            // const vowels = 'aeiouAEIOU';
+            // let count = 0;
+
+            // for (let char of inputString) {
+            //     if (vowels.includes(char)) {
+            //         count++;
+            //     }
+            // }
+
+            const vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+            let count = 0;
+
+            // Iterate through each character in the string
+            for (let i = 0; i < inputString.length; i++) {
+                for (let j = 0; j < vowels.length; j++) {
+                    if (inputString[i] === vowels[j]) {
+                        count++;
+                        break; // Exit the inner loop once a match is found
+                    }
+                }
+            }
+
+            document.getElementById('result').innerText = `Number of vowels: ${count}`;
+        }
+    </script>
+</body>
+</html>
