@@ -1,0 +1,129 @@
+<!-- Create a web page using JavaScript which will contain a Registration form. Also verify all the records are filled. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form with Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+            <span id="usernameError" class="error"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+            <span id="emailError" class="error"></span>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+            <span id="passwordError" class="error"></span>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
+            <span id="confirmPasswordError" class="error"></span>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            // Prevent form submission
+            event.preventDefault();
+
+            // Clear previous errors
+            document.getElementById('usernameError').innerText = '';
+            document.getElementById('emailError').innerText = '';
+            document.getElementById('passwordError').innerText = '';
+            document.getElementById('confirmPasswordError').innerText = '';
+
+            // Get input values
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+            let isValid = true;
+
+            // Validate username
+            if (username === '') {
+                document.getElementById('usernameError').innerText = 'Username is required.';
+                isValid = false;
+            }
+
+            // Validate email
+            if (email === '') {
+                document.getElementById('emailError').innerText = 'Email is required.';
+                isValid = false;
+            } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+                document.getElementById('emailError').innerText = 'Invalid email format.';
+                isValid = false;
+            }
+
+            // Validate password
+            if (password === '') {
+                document.getElementById('passwordError').innerText = 'Password is required.';
+                isValid = false;
+            } else if (password.length < 6) {
+                document.getElementById('passwordError').innerText = 'Password must be at least 6 characters.';
+                isValid = false;
+            }
+
+            // Validate confirm password
+            if (confirmPassword === '') {
+                document.getElementById('confirmPasswordError').innerText = 'Confirm password is required.';
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').innerText = 'Passwords do not match.';
+                isValid = false;
+            }
+
+            // Show success message if valid
+            if (isValid) {
+                alert('Registration successful!');
+                // Reset form if needed
+                document.getElementById('registrationForm').reset();
+            }
+        });
+    </script>
+</body>
+</html>
