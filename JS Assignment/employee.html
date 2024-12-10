@@ -1,0 +1,105 @@
+<!-- Create a form to accept the Employee details and Basic Salary. Based on the salary calculate the following using JavaScript code: 
+ DA, HRA, PF, TAX, Gross pay, Deduction and Net pay. Output should display the Salary Slip of an Employee. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary Slip</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 400px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .output {
+            margin-top: 20px;
+        }
+        .output p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Employee Salary Slip Generator</h2>
+
+    <form id="salaryForm">
+        <label for="empName">Employee Name:</label>
+        <input type="text" id="empName" required>
+
+        <label for="empId">Employee ID:</label>
+        <input type="text" id="empId" required>
+
+        <label for="basicSalary">Basic Salary:</label>
+        <input type="number" id="basicSalary" required>
+
+        <button type="button" onclick="calculateSalary()">Generate Salary Slip</button>
+    </form>
+
+    <div class="output" id="salarySlip" style="display:none;">
+        <h3>Salary Slip</h3>
+        <p><strong>Employee Name:</strong> <span id="outputName"></span></p>
+        <p><strong>Employee ID:</strong> <span id="outputId"></span></p>
+        <p><strong>Basic Salary:</strong> ₹<span id="outputBasic"></span></p>
+        <p><strong>DA (Dearness Allowance):</strong> ₹<span id="outputDA"></span></p>
+        <p><strong>HRA (House Rent Allowance):</strong> ₹<span id="outputHRA"></span></p>
+        <p><strong>PF (Provident Fund):</strong> ₹<span id="outputPF"></span></p>
+        <p><strong>Tax:</strong> ₹<span id="outputTax"></span></p>
+        <p><strong>Gross Pay:</strong> ₹<span id="outputGross"></span></p>
+        <p><strong>Deductions:</strong> ₹<span id="outputDeduction"></span></p>
+        <p><strong>Net Pay:</strong> ₹<span id="outputNet"></span></p>
+    </div>
+</div>
+
+<script>
+    function calculateSalary() {
+        // Get the values from the form
+        var empName = document.getElementById("empName").value;
+        var empId = document.getElementById("empId").value;
+        var basicSalary = parseFloat(document.getElementById("basicSalary").value);
+
+        if (isNaN(basicSalary) || basicSalary <= 0) {
+            alert("Please enter a valid Basic Salary");
+            return;
+        }
+
+        // Salary calculations (assuming percentages for demonstration)
+        var da = basicSalary * 0.1;    // 10% of Basic Salary
+        var hra = basicSalary * 0.15;  // 15% of Basic Salary
+        var pf = basicSalary * 0.12;   // 12% of Basic Salary
+        var tax = basicSalary * 0.05;  // 5% of Basic Salary
+        var grossPay = basicSalary + da + hra;
+        var deductions = pf + tax;
+        var netPay = grossPay - deductions;
+
+        // Display the results
+        document.getElementById("outputName").innerText = empName;
+        document.getElementById("outputId").innerText = empId;
+        document.getElementById("outputBasic").innerText = basicSalary.toFixed(2);
+        document.getElementById("outputDA").innerText = da.toFixed(2);
+        document.getElementById("outputHRA").innerText = hra.toFixed(2);
+        document.getElementById("outputPF").innerText = pf.toFixed(2);
+        document.getElementById("outputTax").innerText = tax.toFixed(2);
+        document.getElementById("outputGross").innerText = grossPay.toFixed(2);
+        document.getElementById("outputDeduction").innerText = deductions.toFixed(2);
+        document.getElementById("outputNet").innerText = netPay.toFixed(2);
+
+        document.getElementById("salarySlip").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
